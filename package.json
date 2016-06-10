@@ -1,0 +1,29 @@
+{
+  "name": "react-interactive-tutorials",
+  "version": "0.1.0",
+  "description": "Framework for creating unobtrusive interactive tutorials for use in web apps.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ABASystems/react-interactive-tutorials.git"
+  },
+  "keywords": [
+    "react",
+    "interactive",
+    "tutorial",
+    "training",
+    "guide",
+    "introduction",
+    "intro",
+    "walkthrough"
+  ],
+  "author": "ABA Systems Pty Ltd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ABASystems/react-interactive-tutorials/issues"
+  },
+  "homepage": "https://github.com/ABASystems/react-interactive-tutorials#readme"
+}
