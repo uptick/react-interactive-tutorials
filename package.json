@@ -4,7 +4,10 @@
   "description": "Framework for creating unobtrusive interactive tutorials for use in web apps.",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buildjs": "./node_modules/webpack/bin/webpack.js",
+    "buildsass": "./node_modules/node-sass/bin/node-sass src/interactive-tutorials.sass dist/interactive-tutorials.css",
+    "prepublish": "npm run buildjs && npm run buildsass"
   },
   "repository": {
     "type": "git",
@@ -29,5 +32,13 @@
   "dependencies": {
     "react": "^15.1.0",
     "react-dom": "^15.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "node-sass": "^3.7.0",
+    "webpack": "^1.13.1"
   }
 }
