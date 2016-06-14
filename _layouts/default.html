@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>React Interactive Tutorials ({{ site.foo }})</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+      crossorigin="anonymous"
+    >
+    <script
+      src="https://code.jquery.com/jquery-3.0.0.min.js"
+      integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+      crossorigin="anonymous"
+    ></script>
+    <link href="{{ site.github.url }}/dist/interactive-tutorials.css" rel="stylesheet">
+    <link href="{{ site.github.url }}/demo-site.css" rel="stylesheet">
+  </head>
+  <body>
+    <script
+      src="{{ site.github.url }}/dist/react-interactive-tutorials.js"
+    ></script>
+    <script src="/demo-tutorial.js"></script>
+
+    <div class="header">
+      <div class="container-fluid" style="max-width: 900px;">
+        <a class="title" href="/">React Interactive Tutorials</a>
+        <span style="margin-left: 20px;">
+          <a href="https://github.com/ABASystems/react-interactive-tutorials">GitHub</a>&nbsp;|&nbsp;<a href="https://www.npmjs.com/package/react-interactive-tutorials">NPM</a>
+        </span>
+      </div>
+    </div>
+
+    <div class="content">
+      {{ content }}
+      <script src="/demo-site.js"></script>
+    </div>
+
+    <div class="footer">
+      <div class="container-fluid" style="max-width: 900px;">
+        <a href="http://www.aba-systems.com.au/" class="pull-right">
+          <img
+            class="pull-right"
+            style="max-height: 40px;"
+            src="http://www.aba-systems.com.au/assets/img/logo.png"
+          />
+        </a>
+        <p>Published under the MIT License</p>
+        <p>&copy; Copyright {{ site.time | date: '%Y' }} ABAS</p>
+      </div>
+    </div>
+  </body>
+</html>
