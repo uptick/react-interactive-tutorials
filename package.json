@@ -5,9 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "buildjs": "./node_modules/webpack/bin/webpack.js",
+    "buildjs": "./node_modules/webpack/bin/webpack.js --config webpack.config.js",
+    "buildjs-demo": "./node_modules/webpack/bin/webpack.js --config webpack.config.demo.js",
     "buildsass": "./node_modules/node-sass/bin/node-sass src/style.sass dist/interactive-tutorials.css",
-    "prepublish": "npm run buildjs && npm run buildsass"
+    "buildsass-demo": "./node_modules/node-sass/bin/node-sass src/style.sass dist/interactive-tutorials.css",
+
+    "build": "npm run buildjs && npm run buildsass",
+    "build-demo": "npm run buildjs-demo && npm run buildsass-demo",
+
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
