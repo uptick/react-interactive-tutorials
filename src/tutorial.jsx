@@ -163,7 +163,6 @@ const Tutorial = React.createClass({
 
   componentDidMount: function() {
     var reactClass = this;
-    console.log('jquery resolved is', ($ === JQuery));
     JQuery(document).on('shown.bs.dropdown', reactClass.refreshStep);
     JQuery(document).on('hidden.bs.dropdown', reactClass.refreshStep);
     // hide the tutorial when navigating to a link, already completed steps may show for the load time
