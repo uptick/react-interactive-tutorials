@@ -38,3 +38,6 @@ jspm_packages
 
 # Built files
 dist/
+
+# Jekyll
+_site/
