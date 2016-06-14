@@ -1,12 +1,12 @@
 {
   "name": "react-interactive-tutorials",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Framework for creating unobtrusive interactive tutorials for use in web apps.",
-  "main": "dist/interactive-tutorials.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "buildjs": "./node_modules/webpack/bin/webpack.js",
-    "buildsass": "./node_modules/node-sass/bin/node-sass src/interactive-tutorials.sass dist/interactive-tutorials.css",
+    "buildsass": "./node_modules/node-sass/bin/node-sass src/style.sass dist/interactive-tutorials.css",
     "prepublish": "npm run buildjs && npm run buildsass"
   },
   "repository": {
@@ -30,6 +30,10 @@
   },
   "homepage": "https://github.com/ABASystems/react-interactive-tutorials#readme",
   "dependencies": {
+    "classnames": "^2.2.5",
+    "clone": "^1.0.2",
+    "jquery": "^2.1.4",
+    "js-cookie": "^2.1.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0"
   },
@@ -39,6 +43,7 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "node-sass": "^3.7.0",
-    "webpack": "^1.13.1"
+    "webpack": "^1.12.13",
+    "webpack-node-externals": "^1.2.0"
   }
 }

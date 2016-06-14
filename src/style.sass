@@ -1,0 +1,191 @@
+$blackout-alpha: 0.85
+$blackout-overlay-alpha: 0.15
+$blackout-transition: 0.3s
+
+$tutorial-overlay-spacing: 20px
+
+@-webkit-keyframes directionPulse
+  0%
+    transform: scale(1.0)
+  50%
+    transform: scale(1.05)
+  100%
+    transform: scale(1.0)
+
+@keyframes directionPulse
+  0%
+    transform: scale(1.0)
+  50%
+    transform: scale(1.05)
+  100%
+    transform: scale(1.0)
+
+.react-tutorial-container
+  .status
+    position: fixed
+    bottom: 0
+    left: 0
+    width: 300px
+    // height: 100px
+    padding: $tutorial-overlay-spacing
+    border-top-right-radius: 4px
+
+    color: #fff
+    z-index: 52
+
+    h4
+      text-align: center
+      margin: 0
+
+    div.actions
+      margin-top: 20px
+      a
+        margin: 0
+
+    background: rgba(0,0,0, $blackout-alpha)
+    transition: background $blackout-transition ease
+  &.active .status
+    background: rgba(0,0,0, $blackout-overlay-alpha)
+
+  ul.steps
+    list-style: none
+    padding: 0
+    margin: 0
+    display: block
+    text-align: center
+    li
+      display: inline-block
+      margin: 0 2px
+      opacity: 0.5
+      &.active
+        opacity: 1
+
+  .blackout, .announcements
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    div.too-high, div.too-low, div.announcement
+      position: fixed
+      top: 50%
+      -ms-transform: translateY(-50%)
+      transform: translateY(-50%)
+      left: 0
+      width: 100%
+      text-align: center
+      color: #fff
+      font-size: 24px
+  .announcements
+    z-index: 51
+    div.announcement
+      font-size: 20px
+      line-height: 1.6em
+      white-space: pre-wrap
+      text-align: left
+      max-width: 600px
+      left: 50%
+      -ms-transform: translateY(-50%) translateX(-50%)
+      transform: translateY(-50%) translateX(-50%)
+      div.dismiss
+        margin-top: 2em
+  .blackout
+    background: #000
+    z-index: 50
+
+    div.too-high, div.too-low
+      visibility: hidden
+      opacity: 0
+      transition: opacity 1s ease
+      -webkit-animation: directionPulse 1s infinite
+      animation: directionPulse 1s infinite
+    &.too-high
+      div.too-high
+        visibility: visible
+        opacity: 1
+    &.too-low
+      div.too-low
+        visibility: visible
+        opacity: 1
+
+
+    opacity: 0
+    transition: opacity $blackout-transition ease
+  &.active .blackout
+    opacity: $blackout-alpha
+
+  div.complete
+    color: #fff
+    position: fixed
+    top: 50%
+    left: 50%
+    width: 100%
+    max-width: 500px
+    -ms-transform: translateY(-51%) translateX(-50%)
+    transform: translateY(-51%) translateX(-50%)
+    margin: 0 auto
+    z-index: 51
+
+    h2
+      margin: 0
+      margin-bottom: 2em
+
+    p
+      white-space: pre-wrap
+    a
+      margin-top: 2em
+
+.react-tutorial-highlight
+  position: relative
+  z-index: 52
+
+  &.panel-section, &.panel-body
+    background: #fff
+
+  &.dropdown
+    background: #fff
+  table.table
+    background: #fff
+  &.tab-content
+    background: #fff
+.navbar-default .navbar-nav > li.react-tutorial-highlight > a:hover
+  background: #f8f8f8
+table.table.react-tutorial-highlight
+  background: #fff
+.nav-tabs.react-tutorial-highlight
+  background: #fff
+
+div.react-tutorial-annotation
+  display: none
+  &.visible
+    display: block
+  position: relative
+  > span
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    min-width: 200px
+    max-width: 500px
+    display: block
+    color: #fff
+    -ms-transform: translateY(100%)
+    transform: translateY(100%)
+    padding: 15px 0
+    z-index: 52
+    white-space: pre-wrap
+    font-size: 15px
+    line-height: 1.2em
+  span.skip
+    display: block
+    opacity: 0.8
+    margin: 10px 0
+    text-align: right
+    &:hover
+      opacity: 1
+      cursor: pointer
+  &.before > span
+    bottom: auto
+    top: 0
+    -ms-transform: translateY(-100%)
+    transform: translateY(-100%)
