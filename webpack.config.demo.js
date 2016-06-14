@@ -1,4 +1,4 @@
-var config = require('./webpack.config.base');
+var config = require('./webpack.config');
 
 config.externals = {};
 
