@@ -75,14 +75,14 @@ your favourite colour was guessed correctly.',
       },
       {
         key: 'new-page',
-        announce: 'The tutorial state can be inferred across pages, if you set your conditions \
-wisely.\n\nIn this case, the url matching "/demo-form/" is used to recognise the fact that we have \
-progressed.',
+        announce: "The tutorial state can be inferred across pages, if you set your conditions \
+wisely.\n\nIn this case, the url matching 'react-interactive-tutorials/demo-form' is used to \
+recognise the fact that we have progressed.",
         announceDismiss: 'Okay, cool',
         activeWhen: [
           {
             compare: 'url',
-            url: /^\/react-interactive-tutorials\/demo-form\/$/,
+            url: /^\/react-interactive-tutorials\/demo-form$/,
           },
         ],
       },
@@ -94,7 +94,7 @@ progressed.',
         activeWhen: [
           {
             compare: 'url',
-            url: /^\/react-interactive-tutorials\/demo-form\/$/,
+            url: /^\/react-interactive-tutorials\/demo-form$/,
           },
           {
             compare: 'checkpointComplete',
