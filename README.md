@@ -2,7 +2,7 @@
 Framework for creating unobtrusive interactive tutorials for use in web apps.
 
 ## Live Demo
-Have a play around with the live demo here: [http://abasystems.github.io/react-interactive-tutorials/]
+Have a play around with the live demo here: http://abasystems.github.io/react-interactive-tutorials/
 
 ## How it Works
 Tutorials are represented as a set of prompts that will result in the user successfully completing
@@ -16,10 +16,10 @@ and do something unexpected / get lost in the middle of a tutorial without conse
 To install, you will need:
 
 - Bootstrap 3 stylesheet, or an implementation of the used classes:
-⋅⋅- btn
-⋅⋅- btn-primary
-⋅⋅- btn-default
-⋅⋅- pull-right
+  - btn
+  - btn-primary
+  - btn-default
+  - pull-right
 
 And anyone using your site will need:
 
@@ -53,4 +53,4 @@ interactiveTutorials.registerTutorials(YOUR_TUTORIALS);
 
 ## Making tutorials
 Full reference documentation coming soon. For now, take a look at the reference on the live demo at
-[http://abasystems.github.io/react-interactive-tutorials/].
+http://abasystems.github.io/react-interactive-tutorials/.
