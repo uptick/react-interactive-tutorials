@@ -29,7 +29,7 @@ layout: default
   identify the optional fields for annotation purposes.<p>
   <div class="panel panel-default">
     <div class="panel-body">
-      <form class="form-horizontal" method="get" action="/demo-form/">
+      <form class="form-horizontal" method="get" action="{{ site.baseurl }}/demo-form/">
         <div class="form-group">
           <label for="colour" class="control-label col-sm-3">Your favourite colour:</label>
           <div class="col-sm-9">
@@ -83,7 +83,7 @@ layout: default
 
   <br />
 
-  <h2>Sample Code</h2>
+  <h2>Sample Code {{ site.url }}</h2>
   <p>Tutorials are represented as javascript object configs. The sample here is for the demo
   tutorial initiated above.</p>
   <p>Note that to function, the config must be loaded onto every page that the user could
@@ -91,6 +91,6 @@ layout: default
   <pre
     style="max-height: 25vh;"
     class="script"
-    data-source="{{ site.url }}/demo-tutorial.js"
+    data-source="{{ site.baseurl }}/demo-tutorial.js"
   >Loading ...</pre>
 </div>

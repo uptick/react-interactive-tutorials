@@ -82,7 +82,7 @@ progressed.',
         activeWhen: [
           {
             compare: 'url',
-            url: /\/demo-form\/$/,
+            url: /^\/react-interactive-tutorials\/demo-form\/$/,
           },
         ],
       },
@@ -94,7 +94,7 @@ progressed.',
         activeWhen: [
           {
             compare: 'url',
-            url: /\/demo-form\/$/,
+            url: /^\/react-interactive-tutorials\/demo-form\/$/,
           },
           {
             compare: 'checkpointComplete',
@@ -110,7 +110,7 @@ announcements on the previous page.",
         activeWhen: [
           {
             compare: 'url',
-            url: /^\/$/,
+            url: /^\/react-interactive-tutorials\/$/,
           },
           {
             compare: 'checkpointComplete',

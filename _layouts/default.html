@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>React Interactive Tutorials ({{ site.foo }})</title>
+    <title>React Interactive Tutorials</title>
     <link
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,14 +13,14 @@
       integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
       crossorigin="anonymous"
     ></script>
-    <link href="{{ site.url }}/dist/interactive-tutorials.css" rel="stylesheet">
-    <link href="{{ site.url }}/demo-site.css" rel="stylesheet">
+    <link href="{{ site.baseurl }}/dist/interactive-tutorials.css" rel="stylesheet">
+    <link href="{{ site.baseurl }}/demo-site.css" rel="stylesheet">
   </head>
   <body>
     <script
-      src="{{ site.url }}/dist/react-interactive-tutorials.js"
+      src="{{ site.baseurl }}/dist/react-interactive-tutorials.js"
     ></script>
-    <script src="/demo-tutorial.js"></script>
+    <script src="{{ site.baseurl }}/demo-tutorial.js"></script>
 
     <div class="header">
       <div class="container-fluid" style="max-width: 900px;">
@@ -33,7 +33,7 @@
 
     <div class="content">
       {{ content }}
-      <script src="{{ site.url }}/demo-site.js"></script>
+      <script src="{{ site.baseurl }}/demo-site.js"></script>
     </div>
 
     <div class="footer">
