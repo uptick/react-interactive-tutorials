@@ -13,12 +13,12 @@
       integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
       crossorigin="anonymous"
     ></script>
-    <link href="/dist/interactive-tutorials.css" rel="stylesheet">
-    <link href="/demo-site.css" rel="stylesheet">
+    <link href="{{ site.url }}/dist/interactive-tutorials.css" rel="stylesheet">
+    <link href="{{ site.url }}/demo-site.css" rel="stylesheet">
   </head>
   <body>
     <script
-      src="/dist/react-interactive-tutorials.js"
+      src="{{ site.url }}/dist/react-interactive-tutorials.js"
     ></script>
     <script src="/demo-tutorial.js"></script>
 
@@ -33,7 +33,7 @@
 
     <div class="content">
       {{ content }}
-      <script src="/demo-site.js"></script>
+      <script src="{{ site.url }}/demo-site.js"></script>
     </div>
 
     <div class="footer">
