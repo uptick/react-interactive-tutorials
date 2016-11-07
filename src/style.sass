@@ -4,6 +4,8 @@ $blackout-transition: 0.3s
 
 $tutorial-overlay-spacing: 20px
 
+$base-z-index: 1050
+
 @-webkit-keyframes directionPulse
   0%
     transform: scale(1.0)
@@ -31,7 +33,7 @@ $tutorial-overlay-spacing: 20px
     border-top-right-radius: 4px
 
     color: #fff
-    z-index: 52
+    z-index: $base-z-index + 2
 
     h4
       text-align: center
@@ -77,7 +79,7 @@ $tutorial-overlay-spacing: 20px
       color: #fff
       font-size: 24px
   .announcements
-    z-index: 51
+    z-index: $base-z-index + 1
     div.announcement
       font-size: 20px
       line-height: 1.6em
@@ -91,7 +93,7 @@ $tutorial-overlay-spacing: 20px
         margin-top: 2em
   .blackout
     background: #000
-    z-index: 50
+    z-index: $base-z-index
 
     div.too-high, div.too-low
       visibility: hidden
@@ -124,7 +126,7 @@ $tutorial-overlay-spacing: 20px
     -ms-transform: translateY(-51%) translateX(-50%)
     transform: translateY(-51%) translateX(-50%)
     margin: 0 auto
-    z-index: 51
+    z-index: $base-z-index + 1
 
     h2
       margin: 0
@@ -137,7 +139,7 @@ $tutorial-overlay-spacing: 20px
 
 .react-tutorial-highlight
   position: relative
-  z-index: 52
+  z-index: $base-z-index + 2
 
   &.panel-section, &.panel-body
     background: #fff
@@ -172,7 +174,7 @@ div.react-tutorial-annotation
     -ms-transform: translateY(100%)
     transform: translateY(100%)
     padding: 15px 0
-    z-index: 52
+    z-index: $base-z-index + 2
     white-space: pre-wrap
     font-size: 15px
     line-height: 1.2em
