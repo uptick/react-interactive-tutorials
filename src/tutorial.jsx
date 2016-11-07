@@ -438,7 +438,7 @@ const Tutorial = React.createClass({
       actions.push(
         <a
           key="abort"
-          className="btn btn-primary btn-sm pull-left"
+          className="btn btn-primary btn-md pull-left"
           onClick={this.exit}
           disabled={this.state.complete}
         >
@@ -449,8 +449,12 @@ const Tutorial = React.createClass({
         actions.push(
           <a
             key="hide"
-            className="btn btn-default btn-sm pull-right"
-            onClick={this.close}
+            href="#"
+            className="btn btn-secondary btn-md pull-right"
+            onClick={(event) => {
+              event.preventDefault();
+              this.close();
+            }}
             disabled={!this.state.popupActive || this.state.complete}
           >
             Hide Help
@@ -461,8 +465,12 @@ const Tutorial = React.createClass({
         actions.push(
           <a
             key="open"
-            className="btn btn-default btn-sm pull-right"
-            onClick={this.open}
+            href="#"
+            className="btn btn-secondary btn-md pull-right"
+            onClick={(event) => {
+              event.preventDefault();
+              this.open();
+            }}
             disabled={this.state.complete}
           >
             Show Help
@@ -496,7 +504,7 @@ const Tutorial = React.createClass({
     if (this.state.popupActive && this.state.step !== null && this.state.step.announce) {
       var dismiss;
       if (this.state.step.announceDismiss) {
-        dismiss = (<a className="pull-right btn btn-default">{this.state.step.announceDismiss}</a>);
+        dismiss = (<a className="pull-right btn btn-secondary">{this.state.step.announceDismiss}</a>);
       }
       announcement = (
         <div className="announcement">

@@ -66,12 +66,12 @@ const are_conditions_met = function(conditions, mustMatchAll) {
         break;
 
       case 'either':
-        if (areStepConditionsMet(condition.when, false))
+        if (are_conditions_met(condition.when, false))
           conditionMet = true;
         break;
 
       case 'all':
-        if (areStepConditionsMet(condition.when, true))
+        if (are_conditions_met(condition.when, true))
           conditionMet = true;
         break;
     }
