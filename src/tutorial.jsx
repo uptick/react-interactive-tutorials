@@ -7,6 +7,8 @@ import Cookie from 'js-cookie'
 
 import { conditionsMet } from './conditions.jsx'
 
+const BASE_Z_INDEX = 1050;
+
 const clear_step_checkpoints = function(tutorial) {
   for (var stepIndex = 0; stepIndex < tutorial.steps.length; stepIndex++) {
     var step = tutorial.steps[stepIndex];
@@ -250,7 +252,6 @@ const Tutorial = React.createClass({
         );
       }
     });
-    JQuery(document).on('click', '.react-tutorial-annotation span.skip', this.dismissAnnouncement);
     window.setInterval(reactClass.refreshOffPage, 500);
     window.setTimeout(function() {
       var tutorialKey = Cookie.get('tutorial_active');
@@ -268,7 +269,6 @@ const Tutorial = React.createClass({
   componentDidUpdate: function(prevProps, prevState) {
     var reactClass = this;
     if (!prevState.popupActive && reactClass.state.popupActive) {
-      JQuery('.react-tutorial-annotation').addClass('visible');
       if (reactClass.state.step !== null && reactClass.state.step.highlight) {
         var highlight = JQuery(reactClass.state.step.highlight);
         if (!reactClass.state.step.noFocus) {
@@ -285,7 +285,6 @@ const Tutorial = React.createClass({
       });
     }
     if (prevState.popupActive && !reactClass.state.popupActive) {
-      JQuery('.react-tutorial-annotation').removeClass('visible');
       window.setTimeout(function() {
         if (!reactClass.state.popupActive) {
           reactClass.setState(state => {
@@ -294,45 +293,6 @@ const Tutorial = React.createClass({
           });
         }
       }, 600);
-    }
-
-    var newStep = reactClass.state.step;
-    var prevStep = prevState.step;
-    if (!(newStep === null && prevStep === null)) {
-      if (
-        (newStep === null && prevStep !== null)
-        || (prevStep === null && newStep !== null)
-        || (prevStep.key != newStep.key)
-      ) {
-        JQuery('.react-tutorial-highlight').removeClass('react-tutorial-highlight');
-        JQuery('.react-tutorial-annotation').remove();
-        if (newStep !== null) {
-          JQuery(newStep.highlight).addClass('react-tutorial-highlight');
-          if (newStep.annotate) {
-            var annotation = JQuery(
-              '<div class="react-tutorial-annotation"><span></span></div>'
-            );
-
-            if (reactClass.state.popupActive)
-              annotation.addClass('visible');
-            if (newStep.annotateBefore)
-              annotation.addClass('before');
-            annotation.find('span').text(newStep.annotate);
-            if (newStep.annotateSkip) {
-              var skip = JQuery('<span class="skip"></span>');
-              skip.text(newStep.annotateSkip);
-              annotation.find('span').append(skip);
-            }
-
-            if (newStep.annotateIn)
-              JQuery(newStep.annotateIn).append(annotation);
-            else if (newStep.annotateAfter)
-              annotation.insertAfter(JQuery(newStep.annotateAfter));
-            else if (newStep.annotateBefore)
-              annotation.insertBefore(JQuery(newStep.annotateBefore));
-          }
-        }
-      }
     }
   },
 
@@ -411,6 +371,101 @@ const Tutorial = React.createClass({
     this.abort();
   },
 
+  renderHighlightStyles: function() {
+    var styles = '';
+    if (this.state.popupActive) {
+      if (this.state.step !== null) {
+        if (this.state.step.highlight) {
+          var background = '';
+          if (this.state.step.highlightBack) {
+            background = `background: ${this.state.step.highlightBack};\n`;
+          }
+
+          styles += `
+${this.state.step.highlight} {
+  position: relative;
+  z-index: ${BASE_Z_INDEX + 2};
+  ${background}
+}
+          `;
+        }
+      }
+    }
+    return styles;
+  },
+  renderAnnotationStyles: function() {
+    var step = this.state.step;
+    var styles = '';
+    if (this.state.popupActive) {
+      if (step !== null) {
+        if (step.annotate) {
+          var margin, position, movement, selector, addSelector = '';
+          if (step.annotateAfter) {
+            margin = 'margin-top: 1rem;\n';
+            position = 'position: absolute;\n';
+            movement = 'top: 100%;\n';
+
+            selector = step.annotateAfter;
+            addSelector = step.annotateAfter + ':after';
+          }
+          else if (step.annotateBefore) {
+            margin = 'margin-bottom: 1rem;\n';
+            position = 'position: absolute;\n';
+            movement = 'bottom: 100%;\n';
+
+            selector = step.annotateBefore;
+            addSelector = step.annotateBefore + ':before';
+          }
+          else if (step.annotateIn) {
+            margin = 'margin-top: 1rem;\n';
+            position = 'position: absolute;\n';
+
+            selector = step.annotateIn;
+            addSelector = step.annotateIn + ':after';
+          }
+
+          if (selector) {
+            var content = (step.annotate || '');
+            if (step.annotateSkip) {
+              if (step.editWhileOpen) {
+                content += `\n\nWhen you are done, press the '${step.annotateSkip}' button in the bottom right corner of your screen.`;
+              }
+              else {
+                content += `\n\nTo continue, press the '${step.annotateSkip}' button in the bottom right corner of your screen.`;
+              }
+            }
+            content = content.replace(/\n/g, '\\00000a').replace(/'/g, "\\'");
+            styles += `
+${addSelector} {
+  opacity: 0.9;
+  content: '${content}';
+  ${margin}
+  ${position}
+  ${movement}
+  left: 0;
+  width: 100%;
+  min-width: 200px;
+  max-width: 500px;
+  z-index: ${BASE_Z_INDEX + 2};
+  color: #fff;
+  white-space: pre-wrap;
+  font-size: 15px;
+  line-height: 1.2em;
+}
+          `;
+        }
+        if (step.annotateBefore || step.annotateAfter) {
+          styles += `
+${selector} {
+  position: relative;
+}
+            `;
+          }
+        }
+      }
+    }
+    return styles;
+  },
   render: function() {
     var current;
     if (this.state.tutorial !== null) {
@@ -500,11 +555,39 @@ const Tutorial = React.createClass({
         </div>
       );
     }
+
+    var skipper;
+    if (this.state.step !== null && this.state.step.annotateSkip) {
+      skipper = (
+        <div className="skipper">
+          <p>
+            <a className="btn btn-primary btn-block" href="#" onClick={(event) => {
+              event.preventDefault();
+              this.dismissAnnouncement();
+            }}>
+              {this.state.step.annotateSkip}
+            </a>
+          </p>
+          <p>(Go to next step)</p>
+        </div>
+      );
+    }
+
     var announcement;
     if (this.state.popupActive && this.state.step !== null && this.state.step.announce) {
       var dismiss;
       if (this.state.step.announceDismiss) {
-        dismiss = (<a className="pull-right btn btn-secondary">{this.state.step.announceDismiss}</a>);
+        dismiss = (
+          <a
+            className="pull-right btn btn-secondary"
+            href="#"
+            onClick={(event) => {
+              event.preventDefault();
+            }}
+          >
+            {this.state.step.announceDismiss}
+          </a>
+        );
       }
       announcement = (
         <div className="announcement">
@@ -520,6 +603,9 @@ const Tutorial = React.createClass({
       blackoutSize = 100;
     return (
       <div className={ClassNames('react-tutorial-container', {'active': this.state.popupActive})}>
+        <style>
+          {this.renderHighlightStyles() + '\n' + this.renderAnnotationStyles()}
+        </style>
         <div
           className={ClassNames('blackout', {
             'too-high': this.state.tooHigh,
@@ -544,6 +630,7 @@ const Tutorial = React.createClass({
         </div>
         {current}
         {complete}
+        {skipper}
       </div>
     );
   },

@@ -1,6 +1,6 @@
 $blackout-alpha: 0.85
 $blackout-overlay-alpha: 0.15
-$blackout-transition: 0.3s
+$blackout-transition: 0.2s
 
 $tutorial-overlay-spacing: 20px
 
@@ -23,17 +23,19 @@ $base-z-index: 1050
     transform: scale(1.0)
 
 .react-tutorial-container
-  .status
+  .status, .skipper
     position: fixed
     bottom: 0
-    left: 0
     width: 300px
-    // height: 100px
     padding: $tutorial-overlay-spacing
-    border-top-right-radius: 4px
-
     color: #fff
     z-index: $base-z-index + 2
+
+  .status
+    left: 0
+    border-top-right-radius: 4px
+    background: rgba(0,0,0, $blackout-alpha)
+    transition: background $blackout-transition ease
 
     h4
       text-align: center
@@ -44,10 +46,18 @@ $base-z-index: 1050
       a
         margin: 0
 
-    background: rgba(0,0,0, $blackout-alpha)
-    transition: background $blackout-transition ease
   &.active .status
     background: rgba(0,0,0, $blackout-overlay-alpha)
+
+  .skipper
+    display: none
+    right: 0
+    p
+      text-align: center
+      &:last-child
+        margin-bottom: 0
+  &.active .skipper
+    display: block
 
   ul.steps
     list-style: none
@@ -136,58 +146,3 @@ $base-z-index: 1050
       white-space: pre-wrap
     a
       margin-top: 2em
-
-.react-tutorial-highlight
-  position: relative
-  z-index: $base-z-index + 2
-
-  &.panel-section, &.panel-body
-    background: #fff
-
-  &.dropdown
-    background: #fff
-  table.table
-    background: #fff
-  &.tab-content
-    background: #fff
-.navbar-default .navbar-nav > li.react-tutorial-highlight > a:hover
-  background: #f8f8f8
-table.table.react-tutorial-highlight
-  background: #fff
-.nav-tabs.react-tutorial-highlight
-  background: #fff
-
-div.react-tutorial-annotation
-  display: none
-  &.visible
-    display: block
-  position: relative
-  > span
-    position: absolute
-    bottom: 0
-    left: 0
-    width: 100%
-    min-width: 200px
-    max-width: 500px
-    display: block
-    color: #fff
-    -ms-transform: translateY(100%)
-    transform: translateY(100%)
-    padding: 15px 0
-    z-index: $base-z-index + 2
-    white-space: pre-wrap
-    font-size: 15px
-    line-height: 1.2em
-  span.skip
-    display: block
-    opacity: 0.8
-    margin: 10px 0
-    text-align: right
-    &:hover
-      opacity: 1
-      cursor: pointer
-  &.before > span
-    bottom: auto
-    top: 0
-    -ms-transform: translateY(-100%)
-    transform: translateY(-100%)
