@@ -185,6 +185,9 @@ const Tutorial = React.createClass({
         reactClass.refreshStep();
       }, 1500);
     };
+    JQuery(document).on('shown.bs.modal', () => {
+      this.acknowledge(null);
+    });
     JQuery(document).on('single-page-tab-loaded', function(event) {
       window.setTimeout(function() {
         reactClass.refreshStep();
@@ -451,6 +454,7 @@ ${addSelector} {
   white-space: pre-wrap;
   font-size: 15px;
   line-height: 1.2em;
+  text-align: left;
 }
           `;
         }
