@@ -1,4 +1,4 @@
-$('pre.script').each(function(index, element) {
+$('code.script').each(function(index, element) {
   var jqElement = $(element);
   var source = jqElement.data('source');
   $.ajax({

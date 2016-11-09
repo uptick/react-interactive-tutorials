@@ -497,7 +497,7 @@ ${selector} {
       actions.push(
         <a
           key="abort"
-          className="btn btn-primary btn-md pull-left"
+          className="btn btn-primary btn-md float-xs-left"
           onClick={this.exit}
           disabled={this.state.complete}
         >
@@ -509,7 +509,7 @@ ${selector} {
           <a
             key="hide"
             href="#"
-            className="btn btn-secondary btn-md pull-right"
+            className="btn btn-secondary btn-md float-xs-right"
             onClick={(event) => {
               event.preventDefault();
               this.close();
@@ -525,7 +525,7 @@ ${selector} {
           <a
             key="open"
             href="#"
-            className="btn btn-secondary btn-md pull-right"
+            className="btn btn-secondary btn-md float-xs-right"
             onClick={(event) => {
               event.preventDefault();
               this.open();
@@ -555,7 +555,7 @@ ${selector} {
         <div className="complete">
           <h2>{this.state.tutorial.complete.title || 'Tutorial Complete'}</h2>
           <p>{this.state.tutorial.complete.message}</p>
-          <a className="btn btn-primary pull-right" onClick={this.finalise}>Complete</a>
+          <a className="btn btn-primary float-xs-right" onClick={this.finalise}>Complete</a>
         </div>
       );
     }
@@ -583,7 +583,7 @@ ${selector} {
       if (this.state.step.announceDismiss) {
         dismiss = (
           <a
-            className="pull-right btn btn-secondary"
+            className="float-xs-right btn btn-secondary"
             href="#"
             onClick={(event) => {
               event.preventDefault();

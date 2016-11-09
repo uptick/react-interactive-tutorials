@@ -17,7 +17,7 @@ You should not be able to force the tutorial into any situtation it cannot recov
         highlight: '#colour',
         annotate: 'Step one: choose your favourite colour.\n\nNote that you can skip this step if \
 your favourite colour was guessed correctly.',
-        annotateAfter: '#colour',
+        annotateIn: 'div.colour-input-group > div',
         annotateSkip: 'Skip',
         activeWhen: [
           {
@@ -30,7 +30,7 @@ your favourite colour was guessed correctly.',
         key: 'entering-name',
         highlight: '#name',
         annotate: 'Now we need to know your full name. This is mandatory, so start typing!',
-        annotateAfter: '#name',
+        annotateIn: 'div.name-input-group > div',
         activeWhen: [
           {
             compare: 'checkpointComplete',
@@ -40,10 +40,13 @@ your favourite colour was guessed correctly.',
       },
       {
         key: 'optional-info',
-        highlight: '#more-info',
-        annotate: 'You can choose to enter more information at this point.',
-        annotateAfter: '#more-info',
-        annotateSkip: 'I would rather not',
+        highlight: 'form div.form-details',
+        highlightBack: '#fff',
+        annotate: 'You can choose to enter more information at this point, and review the \
+information you have already provided\n\nThe help overlay will remain open whilst you are typing.',
+        annotateAfter: 'form div.form-details',
+        annotateSkip: 'Okay I am done',
+        editWhileOpen: true,
         activeWhen: [
           {
             compare: 'checkpointComplete',
@@ -58,9 +61,9 @@ your favourite colour was guessed correctly.',
       },
       {
         key: 'submission',
-        highlight: 'button[type="submit"]',
+        highlight: 'form button[type="submit"]',
         annotate: 'Click "Submit" to submit the form and continue',
-        annotateAfter: 'div.actions > div:last-child',
+        annotateAfter: 'form button[type="submit"]',
         activeWhen: [
           {
             compare: 'inputNotVal',
