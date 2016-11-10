@@ -5,7 +5,7 @@ var tutorials = {
     steps: [
       {
         key: 'anywhere',
-        announce: 'The tutorial prompts will present themselves as a series of modals with \
+        announce: 'The tutorial will present itself as a series of modals with \
 annotations and prompts on how to progress. This, in fact, is an announcement-style tutorial step.\
 \n\nFeel free to hide / show this modal at any point to attempt to break the flow of the tutorial. \
 You should not be able to force the tutorial into any situtation it cannot recover from.',
