@@ -9,7 +9,7 @@ var TUTORIAL_CLASS = null;
 var REGISTER_DELAY = null;
 var TUTORIALS = {};
 
-const init_dom = function(callback) {
+function init_dom(callback) {
   if (TUTORIAL_CLASS !== null) {
     callback();
     return;
@@ -18,15 +18,15 @@ const init_dom = function(callback) {
   destination.appendTo('body');
   TUTORIAL_CLASS = ReactDom.render(<Tutorial />, destination[0]);
   callback();
-};
+}
 
-const register_tutorials = function() {
+function register_tutorials() {
   init_dom(function() {
     TUTORIAL_CLASS.updateTutorials(TUTORIALS);
   });
-};
+}
 
-const debounce_register_tutorials = function(tutorials) {
+function registerTutorials(tutorials) {
   var newTutorials = Clone(TUTORIALS);
   for (var tutorialKey in tutorials)
     newTutorials[tutorialKey] = tutorials[tutorialKey];
@@ -34,33 +34,33 @@ const debounce_register_tutorials = function(tutorials) {
   if (REGISTER_DELAY !== null)
     window.clearTimeout(REGISTER_DELAY);
   REGISTER_DELAY = window.setTimeout(register_tutorials, 500);
-};
+}
 
-const register_finalise_callback = function(callback) {
+function registerFinaliseCallback(callback) {
   init_dom(function() {
     TUTORIAL_CLASS.addFinaliseCallback(callback);
   });
-};
+}
 
-const start_tutorial = function(tutorialKey) {
+function startTutorial(tutorialKey) {
   if (TUTORIAL_CLASS === null) {
     console.error('Cannot start tutorial: Tutorials not yet initialised.');
     return;
   }
   TUTORIAL_CLASS.start(tutorialKey);
-};
+}
 
-const abort_tutorial = function() {
+function abortTutorial() {
   if (TUTORIAL_CLASS === null) {
     console.warning('Cannot abort tutorial: Tutorials not yet initialised.');
     return;
   }
   TUTORIAL_CLASS.abort();
-};
+}
 
-module.exports = {
-  registerTutorials: debounce_register_tutorials,
-  registerFinaliseCallback: register_finalise_callback,
-  startTutorial: start_tutorial,
-  abortTutorial: abort_tutorial,
-};
+export {
+  registerTutorials,
+  registerFinaliseCallback,
+  startTutorial,
+  abortTutorial,
+}

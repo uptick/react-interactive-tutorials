@@ -9,7 +9,7 @@ import { conditionsMet } from './conditions.jsx'
 
 const BASE_Z_INDEX = 1050;
 
-const clear_step_checkpoints = function(tutorial) {
+function clear_step_checkpoints(tutorial) {
   for (var stepIndex = 0; stepIndex < tutorial.steps.length; stepIndex++) {
     var step = tutorial.steps[stepIndex];
     Cookie.remove('tutorial_' + tutorial.key + '_' + step.key);
@@ -20,19 +20,23 @@ const clear_step_checkpoints = function(tutorial) {
       Cookie.remove('tutorial_' + tutorial.key + '_' + checkpoint.checkpoint);
     }
   }
-};
+}
 
-const set_step_checkpoint = function(tutorial, step) {
+function set_step_checkpoint(tutorial, step) {
   Cookie.set(
     'tutorial_' + tutorial.key + '_' + step.key,
     true,
     {path: '/'}
   );
-};
+}
 
-const Tutorial = React.createClass({
-  getInitialState: function() {
-    return {
+class Tutorial extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...this.state,
+
       tutorials: {},
       finaliseCallbacks: [],
 
@@ -46,21 +50,21 @@ const Tutorial = React.createClass({
       tooHigh: true,
       tooLow: false,
     };
-  },
+  }
 
-  addFinaliseCallback: function(callback) {
+  addFinaliseCallback(callback) {
     this.setState(state => {
       state.finaliseCallbacks = state.finaliseCallbacks.concat(callback);
       return state;
     });
-  },
-  updateTutorials: function(tutorials) {
+  }
+  updateTutorials(tutorials) {
     this.setState(state => {
       state.tutorials = tutorials;
       return state;
     }, this.refreshStep);
-  },
-  refreshStep: function(callback) {
+  }
+  refreshStep(callback) {
     if (this.state.tutorial !== null) {
       if (this.state.tutorial.complete && this.state.tutorial.complete.on == 'checkpointReached') {
         if (Cookie.get('tutorial_' + this.state.tutorial.key + '_' + this.state.tutorial.complete.checkpoint)) {
@@ -97,23 +101,22 @@ const Tutorial = React.createClass({
       }
     }
 
-    var reactClass = this;
     if (newStep === null) {
-      if (reactClass.state.step !== null) {
-        reactClass.setState(state => {
+      if (this.state.step !== null) {
+        this.setState(state => {
           state.step = null;
           state.complete = false;
           return state;
         }, function() {
           if (typeof callback == 'function')
             callback();
-          reactClass.refreshOffPage();
+          this.refreshOffPage();
         });
       }
     }
     else {
-      if (reactClass.state.step === null || newStep.key != reactClass.state.step.key) {
-        reactClass.setState(state => {
+      if (this.state.step === null || newStep.key != this.state.step.key) {
+        this.setState(state => {
           state.step = newStep;
           state.complete = false;
           if (oldStepIndex === null || newStepIndex > oldStepIndex)
@@ -122,12 +125,12 @@ const Tutorial = React.createClass({
         }, function() {
           if (typeof callback == 'function')
             callback();
-          reactClass.refreshOffPage();
+          this.refreshOffPage();
         });
       }
     }
-  },
-  refreshOffPage: function() {
+  }
+  refreshOffPage() {
     if (this.state.step !== null) {
       var highlight = JQuery(this.state.step.highlight);
       if (highlight && typeof highlight[0] !== 'undefined') {
@@ -161,52 +164,52 @@ const Tutorial = React.createClass({
         return state;
       });
     }
-  },
+  }
 
-  componentDidMount: function() {
-    var reactClass = this;
-    JQuery(document).on('shown.bs.dropdown', reactClass.refreshStep);
-    JQuery(document).on('hidden.bs.dropdown', reactClass.refreshStep);
+  componentDidMount() {
+    JQuery(document).on('shown.bs.dropdown', this.refreshStep.bind(this));
+    JQuery(document).on('hidden.bs.dropdown', this.refreshStep.bind(this));
     // hide the tutorial when navigating to a link, already completed steps may show for the load time
-    JQuery(document).on('click', 'a[href]:not([href=""]):not([href="#"])', function(event) {
-      reactClass.close();
+    JQuery(document).on('click', 'a[href]:not([href=""]):not([href="#"])', (event) => {
+      this.close();
     });
-    var onInputChange = function(event, ignoreBlank) {
+    var onInputChange = (event, ignoreBlank) => {
       var newValue = JQuery(event.target).val();
-      if (reactClass.proceedAfter !== null) {
-        window.clearTimeout(reactClass.proceedAfter);
-        reactClass.proceedAfter = null;
+      if (this.proceedAfter !== null) {
+        window.clearTimeout(this.proceedAfter);
+        this.proceedAfter = null;
       }
       if (newValue == '' && ignoreBlank)
         return;
-      if (reactClass.state.tutorial !== null && !reactClass.state.step.editWhileOpen)
-        reactClass.acknowledge(null);
-      reactClass.proceedAfter = window.setTimeout(function() {
-        reactClass.refreshStep();
+      if (this.state.tutorial !== null && !this.state.step.editWhileOpen)
+        this.acknowledge(null);
+      this.proceedAfter = window.setTimeout(() => {
+        this.refreshStep();
       }, 1500);
     };
+    onInputChange = onInputChange.bind(this);
     JQuery(document).on('shown.bs.modal', () => {
       this.acknowledge(null);
     });
-    JQuery(document).on('single-page-tab-loaded', function(event) {
-      window.setTimeout(function() {
-        reactClass.refreshStep();
+    JQuery(document).on('single-page-tab-loaded', (event) => {
+      window.setTimeout(() => {
+        this.refreshStep();
       }, 500);
     });
-    JQuery(document).on('input', 'input, textarea', function(event) {
+    JQuery(document).on('input', 'input, textarea', (event) => {
       onInputChange(event, true);
     });
-    JQuery(document).on('change', 'select', function(event) {
+    JQuery(document).on('change', 'select', (event) => {
       onInputChange(event, true);
     });
-    JQuery(document).on('change', 'input[type="radio"]', function(event) {
+    JQuery(document).on('change', 'input[type="radio"]', (event) => {
       onInputChange(event, false);
     });
-    JQuery(document).on('selectChoice', function(event) {
+    JQuery(document).on('selectChoice', (event) => {
       onInputChange(event, false);
     });
-    JQuery(document).on('submit', 'form', function(event) {
-      if (!reactClass.state.tutorial)
+    JQuery(document).on('submit', 'form', (event) => {
+      if (!this.state.tutorial)
         return;
 
       var expect_form = function(form, method, url, callback) {
@@ -214,40 +217,39 @@ const Tutorial = React.createClass({
           return false;
         if (url && form.attr('action').match(url) === null)
           return false;
-        console.log('method', method, 'matches', form);
-        console.log('url', url, 'matches', form);
         callback();
         return true;
-      }
+      };
+      expect_form = expect_form.bind(this);
 
       var form = JQuery(event.target);
-      if (reactClass.state.tutorial.complete && reactClass.state.tutorial.complete.on == 'form_submission') {
+      if (this.state.tutorial.complete && this.state.tutorial.complete.on == 'form_submission') {
         expect_form(
           form,
-          reactClass.state.tutorial.complete.form.method,
-          reactClass.state.tutorial.complete.form.url,
-          function() {
+          this.state.tutorial.complete.form.method,
+          this.state.tutorial.complete.form.url,
+          () => {
             Cookie.set(
-              'tutorial_complete_' + reactClass.state.tutorial.key,
+              'tutorial_complete_' + this.state.tutorial.key,
               true,
               {path: '/'}
             );
           }
         );
       }
-      if (!reactClass.state.tutorial.checkpoints)
+      if (!this.state.tutorial.checkpoints)
         return;
-      for (var checkpointIndex = 0; checkpointIndex < reactClass.state.tutorial.checkpoints.length; checkpointIndex++) {
-        var checkpoint = reactClass.state.tutorial.checkpoints[checkpointIndex];
+      for (var checkpointIndex = 0; checkpointIndex < this.state.tutorial.checkpoints.length; checkpointIndex++) {
+        var checkpoint = this.state.tutorial.checkpoints[checkpointIndex];
         if (checkpoint.on != 'form_submission')
           continue;
         expect_form(
           form,
           checkpoint.form.method,
           checkpoint.form.url,
-          function() {
+          () => {
             Cookie.set(
-              'tutorial_' + reactClass.state.tutorial.key + '_' + checkpoint.checkpoint,
+              'tutorial_' + this.state.tutorial.key + '_' + checkpoint.checkpoint,
               true,
               {path: '/'}
             );
@@ -255,26 +257,25 @@ const Tutorial = React.createClass({
         );
       }
     });
-    window.setInterval(reactClass.refreshOffPage, 500);
-    window.setTimeout(function() {
+    window.setInterval(this.refreshOffPage.bind(this), 500);
+    window.setTimeout(() => {
       var tutorialKey = Cookie.get('tutorial_active');
       if (tutorialKey) {
-        reactClass.setState(state => {
+        this.setState(state => {
           state.tutorial = Clone(state.tutorials[tutorialKey]);
           state.step = null;
           return state;
-        }, function() {
-          reactClass.refreshStep(reactClass.open);
+        }, () => {
+          this.refreshStep(this.open.bind(this));
         });
       }
     }, 500);
-  },
-  componentDidUpdate: function(prevProps, prevState) {
-    var reactClass = this;
-    if (!prevState.popupActive && reactClass.state.popupActive) {
-      if (reactClass.state.step !== null && reactClass.state.step.highlight) {
-        var highlight = JQuery(reactClass.state.step.highlight);
-        if (!reactClass.state.step.noFocus) {
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.popupActive && this.state.popupActive) {
+      if (this.state.step !== null && this.state.step.highlight) {
+        var highlight = JQuery(this.state.step.highlight);
+        if (!this.state.step.noFocus) {
           if (highlight.is('input') || highlight.is('select'))
             highlight.focus();
           else {
@@ -282,25 +283,24 @@ const Tutorial = React.createClass({
           }
         }
       }
-      reactClass.setState(state => {
+      this.setState(state => {
         state.blockingInput = true;
         return state;
       });
     }
-    if (prevState.popupActive && !reactClass.state.popupActive) {
-      window.setTimeout(function() {
-        if (!reactClass.state.popupActive) {
-          reactClass.setState(state => {
+    if (prevState.popupActive && !this.state.popupActive) {
+      window.setTimeout(() => {
+        if (!this.state.popupActive) {
+          this.setState(state => {
             state.blockingInput = false;
             return state;
           });
         }
       }, 600);
     }
-  },
+  }
 
-  start: function(tutorialName) {
-    var reactClass = this;
+  start(tutorialName) {
     var tutorial = this.state.tutorials[tutorialName];
     if (!tutorial) {
       console.error('Tutorial "' + tutorialName + '" not found.');
@@ -308,54 +308,53 @@ const Tutorial = React.createClass({
     }
     Cookie.set('tutorial_active', tutorialName, {path: '/'});
     clear_step_checkpoints(tutorial);
-    reactClass.setState(state => {
+    this.setState(state => {
       state.tutorial = Clone(tutorial);
       state.step = null;
       state.popupActive = true;
       return state;
-    }, function() {
-      reactClass.refreshStep();
+    }, () => {
+      this.refreshStep();
     });
-  },
-  open: function() {
+  }
+  open() {
     if (this.state.tutorial !== null) {
       this.setState(state => {
         state.popupActive = true;
         return state;
       });
     }
-  },
-  dismissAnnouncement: function(event) {
+  }
+  dismissAnnouncement(event) {
     this.acknowledge(300);
-  },
-  acknowledge: function(delay) {
-    var reactClass = this;
-    if (reactClass.state.tutorial === null)
+  }
+  acknowledge(delay) {
+    if (this.state.tutorial === null)
       return;
-    set_step_checkpoint(reactClass.state.tutorial, reactClass.state.step);
-    reactClass.close();
+    set_step_checkpoint(this.state.tutorial, this.state.step);
+    this.close();
     if (delay !== null) {
-      window.setTimeout(function() {
-        reactClass.refreshStep();
+      window.setTimeout(() => {
+        this.refreshStep();
       }, delay);
     }
-  },
-  close: function() {
+  }
+  close() {
     if (this.state.popupActive && !this.state.complete) {
       this.setState(state => {
         state.popupActive = false;
         return state;
       });
     }
-  },
-  finalise: function() {
+  }
+  finalise() {
     this.abort();
     for (var callbackIndex = 0; callbackIndex < this.state.finaliseCallbacks.length; callbackIndex++) {
       var callback = this.state.finaliseCallbacks[callbackIndex];
       callback(this.state.tutorial);
     }
-  },
-  abort: function() {
+  }
+  abort() {
     Cookie.remove('tutorial_active');
     if (this.state.tutorial !== null) {
       Cookie.remove('tutorial_complete_' + this.state.tutorial.key);
@@ -367,14 +366,14 @@ const Tutorial = React.createClass({
         return state;
       });
     }
-  },
-  exit: function() {
+  }
+  exit() {
     if (this.state.complete)
       return;
     this.abort();
-  },
+  }
 
-  renderHighlightStyles: function() {
+  renderHighlightStyles() {
     var styles = '';
     if (this.state.popupActive) {
       if (this.state.step !== null) {
@@ -395,8 +394,8 @@ ${this.state.step.highlight} {
       }
     }
     return styles;
-  },
-  renderAnnotationStyles: function() {
+  }
+  renderAnnotationStyles() {
     var step = this.state.step;
     var styles = '';
     if (this.state.popupActive) {
@@ -469,8 +468,8 @@ ${selector} {
       }
     }
     return styles;
-  },
-  render: function() {
+  }
+  render() {
     var current;
     if (this.state.tutorial !== null) {
       var steps = [];
@@ -498,7 +497,7 @@ ${selector} {
         <a
           key="abort"
           className="btn btn-primary btn-md float-xs-left"
-          onClick={this.exit}
+          onClick={this.exit.bind(this)}
           disabled={this.state.complete}
         >
           Exit Tutorial
@@ -555,7 +554,7 @@ ${selector} {
         <div className="complete">
           <h2>{this.state.tutorial.complete.title || 'Tutorial Complete'}</h2>
           <p>{this.state.tutorial.complete.message}</p>
-          <a className="btn btn-primary float-xs-right" onClick={this.finalise}>Complete</a>
+          <a className="btn btn-primary float-xs-right" onClick={this.finalise.bind(this)}>Complete</a>
         </div>
       );
     }
@@ -596,7 +595,7 @@ ${selector} {
       announcement = (
         <div className="announcement">
           {this.state.step.announce.trim()}
-          <div className="dismiss" onClick={this.dismissAnnouncement}>
+          <div className="dismiss" onClick={this.dismissAnnouncement.bind(this)}>
             {dismiss}
           </div>
         </div>
@@ -637,7 +636,7 @@ ${selector} {
         {skipper}
       </div>
     );
-  },
-});
+  }
+}
 
-module.exports = Tutorial;
+export default Tutorial

@@ -1,7 +1,7 @@
 import JQuery from 'jquery'
 import Cookie from 'js-cookie'
 
-const are_conditions_met = function(conditions, mustMatchAll) {
+function conditionsMet(conditions, mustMatchAll) {
   var anyConditionMet = false;
   var allConditionsMet = true;
   for (var conditionIndex = 0; conditionIndex < conditions.length; conditionIndex++) {
@@ -66,12 +66,12 @@ const are_conditions_met = function(conditions, mustMatchAll) {
         break;
 
       case 'either':
-        if (are_conditions_met(condition.when, false))
+        if (conditionsMet(condition.when, false))
           conditionMet = true;
         break;
 
       case 'all':
-        if (are_conditions_met(condition.when, true))
+        if (conditionsMet(condition.when, true))
           conditionMet = true;
         break;
     }
@@ -92,6 +92,6 @@ const are_conditions_met = function(conditions, mustMatchAll) {
   }
 };
 
-module.exports = {
-  conditionsMet: are_conditions_met,
-};
+export {
+  conditionsMet,
+}
