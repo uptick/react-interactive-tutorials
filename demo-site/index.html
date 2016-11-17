@@ -1,7 +1,7 @@
 ---
-layout: default
+layout: base
 ---
-<div class="container-fluid" style="max-width: 900px;">
+<div class="content-container">
   <div class="page-header">
     <h1>Live Demo</h1>
   </div>
@@ -16,15 +16,12 @@ layout: default
   </ul>
   <p>
     <a
-      class="btn btn-primary"
+      class="btn btn-primary begin-tutorial"
       href="#"
-      onClick="javascript: interactiveTutorials.startTutorial('demo');"
     >
       Click here to begin
     </a>
   </p>
-
-  <br />
 
   <h2>Favourite Colour Form</h2>
   <p>This is the demonstration form, a simple traditional web form.<p>
@@ -82,17 +79,13 @@ layout: default
     </form>
   </div>
 
-  <br />
-
   <h2>Sample Code</h2>
   <p>Tutorials are represented as javascript object configs. The sample here is for the demo
   tutorial initiated above.</p>
   <p>Note that to function, the config must be loaded onto every page that the user could
   potentially see the tutorial on.</p>
-  <pre style="max-height: 25vh;">
-    <code
-      class="script"
-      data-source="{{ site.baseurl }}/demo-tutorial.js"
-    >Loading ...</code>
-  </pre>
+  <code
+    class="script"
+    data-source="{{ site.baseurl }}/sample-tutorial.js"
+  >Loading ...</code>
 </div>

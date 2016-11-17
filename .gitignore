@@ -40,4 +40,5 @@ jspm_packages
 dist/
 
 # Jekyll
-_site/
+demo-site/_site/
+demo-site/dist/

@@ -5,6 +5,8 @@ import Clone from 'clone'
 
 import Tutorial from './tutorial.jsx'
 
+import { paragraphs } from './utils.jsx'
+
 var TUTORIAL_CLASS = null;
 var REGISTER_DELAY = null;
 var TUTORIALS = {};
@@ -63,4 +65,5 @@ export {
   registerFinaliseCallback,
   startTutorial,
   abortTutorial,
+  paragraphs,
 }

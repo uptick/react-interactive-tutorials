@@ -1,0 +1,7 @@
+baseurl: /react-interactive-tutorials
+
+layouts_dir: 'node_modules/abas-demo-site/dist'
+
+package_name: React Interactive Tutorials
+package_github_url: https://github.com/ABASystems/react-interactive-tutorials
+package_npm_url: https://www.npmjs.com/package/react-interactive-tutorials
