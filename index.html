@@ -1,0 +1,91 @@
+---
+layout: base
+---
+<div class="content-container">
+  <div class="page-header">
+    <h1>Live Demo</h1>
+  </div>
+  <p>To participate in the tutorial you will need:</p>
+  <ul>
+    <li>Javascript enabled</li>
+    <li>
+      Cookies enabled (for this particular demo tutorial - it is possible to create limited
+      tutorials that do no use cookies)
+    </li>
+    <li>A modern browser</li>
+  </ul>
+  <p>
+    <a
+      class="btn btn-primary begin-tutorial"
+      href="#"
+    >
+      Click here to begin
+    </a>
+  </p>
+
+  <h2>Favourite Colour Form</h2>
+  <p>This is the demonstration form, a simple traditional web form.<p>
+  <p>The HTML of the form itself contains no annotations, or tutorial logic / contents.
+  The only additions made to accomodate the tutorial were the inclusion of a div with a class to
+  identify the optional fields for annotation purposes.<p>
+  <div class="card">
+    <form method="get" action="{{ site.baseurl }}/demo-form">
+      <div class="card-block form-details">
+        <div class="form-group colour-input-group row">
+          <label for="colour" class="control-label col-sm-3">Your favourite colour:</label>
+          <div class="col-sm-9">
+            <select
+              id="colour"
+              class="form-control"
+              required="true"
+            >
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group name-input-group row">
+          <label for="email" class="control-label col-sm-3">Your full name:</label>
+          <div class="col-sm-9">
+            <input
+              id="name"
+              type="text"
+              class="form-control"
+              placeholder="Full name"
+              required="true"
+            >
+          </div>
+        </div>
+        <div class="form-group row ">
+          <label for="email" class="control-label col-sm-3">Your email address:</label>
+          <div class="col-sm-9">
+            <input id="email" type="email" class="form-control" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="control-label col-sm-3">Reason for your choice:</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" placeholder="Your reasoning"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-block actions">
+        <div class="text-xs-right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <h2>Sample Code</h2>
+  <p>Tutorials are represented as javascript object configs. The sample here is for the demo
+  tutorial initiated above.</p>
+  <p>Note that to function, the config must be loaded onto every page that the user could
+  potentially see the tutorial on.</p>
+  <code
+    class="script"
+    data-source="{{ site.baseurl }}/sample-tutorial.js"
+  >Loading ...</code>
+</div>
