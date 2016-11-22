@@ -1,4 +1,7 @@
 # react-interactive-tutorials
+
+[![npm version](https://badge.fury.io/js/react-interactive-tutorials.svg)](http://badge.fury.io/js/react-interactive-tutorials)
+![Downloads](http://img.shields.io/npm/dm/react-interactive-tutorials.svg?style=flat)
 Framework for creating unobtrusive interactive tutorials for use in web apps.
 
 ## Live Demo

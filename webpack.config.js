@@ -7,7 +7,7 @@ module.exports = {
     path: __dirname + '/dist',
     filename: 'react-interactive-tutorials.js',
     library: 'interactive-tutorials',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
   module: {
     loaders: [
@@ -22,8 +22,8 @@ module.exports = {
             'stage-0',
           ],
         },
-      }
-    ]
+      },
+    ],
   },
   externals: NodeExternals(),
 };
