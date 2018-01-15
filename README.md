@@ -7,7 +7,7 @@ Framework for creating unobtrusive interactive tutorials for use in web apps.
 
 ## Live Demo
 
-Have a play around with the live demo here: http://abasystems.github.io/react-interactive-tutorials/
+Have a play around with the live demo here: http://uptick.github.io/react-interactive-tutorials/
 
 ## How it Works
 
@@ -62,4 +62,4 @@ interactiveTutorials.registerTutorials(YOUR_TUTORIALS);
 ## Making tutorials
 
 Full reference documentation coming soon. For now, take a look at the reference on the live demo at
-http://abasystems.github.io/react-interactive-tutorials/.
+http://uptick.github.io/react-interactive-tutorials/.

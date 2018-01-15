@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ABASystems/react-interactive-tutorials.git"
+    "url": "git+https://github.com/uptick/react-interactive-tutorials.git"
   },
   "keywords": [
     "react",
@@ -25,12 +25,12 @@
     "intro",
     "walkthrough"
   ],
-  "author": "ABA Systems Pty Ltd",
+  "author": "Uptick Pty Ltd",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ABASystems/react-interactive-tutorials/issues"
+    "url": "https://github.com/uptick/react-interactive-tutorials/issues"
   },
-  "homepage": "https://github.com/ABASystems/react-interactive-tutorials#readme",
+  "homepage": "https://github.com/uptick/react-interactive-tutorials#readme",
   "dependencies": {
     "classnames": "^2.2.5",
     "clone": "^1.0.2",
