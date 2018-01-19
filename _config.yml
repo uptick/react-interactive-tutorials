@@ -1,5 +1,3 @@
-baseurl: /react-interactive-tutorials
-
 layouts_dir: 'node_modules/uptick-demo-site/dist'
 
 package_name: React Interactive Tutorials
