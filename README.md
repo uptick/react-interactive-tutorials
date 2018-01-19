@@ -22,11 +22,11 @@ and do something unexpected / get lost in the middle of a tutorial without conse
 
 To install, you will need:
 
-- Bootstrap 3 stylesheet, or an implementation of the used classes:
+- Bootstrap 4 stylesheet, or an implementation of the used classes:
   - btn
   - btn-primary
   - btn-secondary
-  - pull-right
+  - float-right
 
 And anyone using your site will need:
 
