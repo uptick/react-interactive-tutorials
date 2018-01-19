@@ -2275,8 +2275,8 @@ react-dom@^15.1.0:
     prop-types "^15.5.10"
 
 react-interactive-tutorials@latest:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/react-interactive-tutorials/-/react-interactive-tutorials-0.1.7.tgz#ae06dd6d037fc91ce712e74645c2797eb1987261"
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/react-interactive-tutorials/-/react-interactive-tutorials-0.1.9.tgz#c6e6eac5d96b07d2ab0a294075c984c2da89d93f"
   dependencies:
     classnames "^2.2.5"
     clone "^1.0.2"
@@ -2750,8 +2750,8 @@ uid-number@^0.0.6:
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
 uptick-demo-site@latest:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/uptick-demo-site/-/uptick-demo-site-1.1.1.tgz#81bc0d09a78247b39c264cfc504fe08450a94975"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/uptick-demo-site/-/uptick-demo-site-1.1.2.tgz#3a530cd95ed787bf4838d26cde11923dc9ceb660"
   dependencies:
     jquery "^3.1.1"
 
