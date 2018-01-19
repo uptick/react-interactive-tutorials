@@ -1,6 +1,6 @@
 {
   "name": "react-interactive-tutorials",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Framework for creating unobtrusive interactive tutorials for use in web apps.",
   "main": "index.js",
   "scripts": {
