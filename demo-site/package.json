@@ -16,13 +16,13 @@
     "type": "git",
     "url": "react-interactive-tutorials"
   },
-  "author": "ABA Systems Pty Ltd",
+  "author": "Uptick Pty Ltd",
   "license": "MIT",
   "dependencies": {
-    "abas-demo-site": "^1.0.6",
-    "bootstrap": "^4.0.0-alpha.5",
+    "uptick-demo-site": "latest",
+    "bootstrap": "^4.0.0",
     "jquery": "^3.1.1",
-    "react-interactive-tutorials": "0.1.7"
+    "react-interactive-tutorials": "latest"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

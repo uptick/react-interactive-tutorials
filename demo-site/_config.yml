@@ -1,6 +1,6 @@
 baseurl: /react-interactive-tutorials
 
-layouts_dir: 'node_modules/abas-demo-site/dist'
+layouts_dir: 'node_modules/uptick-demo-site/dist'
 
 package_name: React Interactive Tutorials
 package_github_url: https://github.com/uptick/react-interactive-tutorials
