@@ -45,7 +45,7 @@ npm install react-interactive-tutorials
 Include the built css located at:
 
 ```
-node_modules/react-interactive-tutorials/dist/interactive-tutorials.css
+node_modules/react-interactive-tutorials/dist/react-interactive-tutorials.css
 ```
 
 Register your own tutorials:
