@@ -65,6 +65,10 @@ function conditionsMet(conditions, mustMatchAll) {
           conditionMet = true;
         break;
 
+      case 'click':
+        conditionMet = true;
+        break;
+
       case 'either':
         if (conditionsMet(condition.when, false))
           conditionMet = true;

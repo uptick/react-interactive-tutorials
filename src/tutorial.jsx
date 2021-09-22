@@ -208,6 +208,9 @@ class Tutorial extends React.Component {
     JQuery(document).on('selectChoice', (event) => {
       onInputChange(event, false);
     });
+    JQuery(document).on('click', (event) => {
+      onInputChange(event, false);
+    });
     JQuery(document).on('submit', 'form', (event) => {
       if (!this.state.tutorial)
         return;
